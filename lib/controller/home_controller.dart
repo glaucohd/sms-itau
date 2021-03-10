@@ -42,19 +42,16 @@ class HomeController {
     }
   }
 
-  
   //INTERCEPTA SMS RECEBIDO
   void getSmsMessage(context) {
     SmsReceiver receiver = new SmsReceiver();
     receiver.onSmsReceived.listen((SmsMessage msg) {
       bodyMessage = msg.body;
+      streamAlertInput.add(bodyMessage);
+      print(bodyMessage);
     });
 
     showMyDialog(context, null);
-
-    Future.delayed(Duration(seconds: 8), () {
-      streamAlertInput.add(bodyMessage);
-    });
   }
 
   //SALDO DA CONTA
