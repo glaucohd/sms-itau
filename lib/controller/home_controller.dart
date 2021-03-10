@@ -5,11 +5,15 @@ import 'package:sms_maintained/sms.dart';
 
 class HomeController {
   String bodyMessage;
+  String address = "4828";
 
+  final sender = SmsSender();
   final StreamController streamAlert = StreamController();
 
   Sink get streamAlertInput => streamAlert.sink;
   Stream get streamAlertOutput => streamAlert.stream;
+
+  
 
   void dispose() {
     streamAlert.close();
@@ -56,8 +60,6 @@ class HomeController {
 
   //SALDO DA CONTA
   void accountBalance() {
-    SmsSender sender = SmsSender();
-    String address = "4828";
 
     SmsMessage message = SmsMessage(address, 'Saldo conta');
     message.onStateChanged.listen((state) {
@@ -72,8 +74,6 @@ class HomeController {
 
   //EXTRATO DA CONTA
   void accountStatement() {
-    SmsSender sender = SmsSender();
-    String address = "4828";
 
     SmsMessage message = SmsMessage(address, 'Extrato');
     message.onStateChanged.listen((state) {
@@ -88,8 +88,6 @@ class HomeController {
 
   //LANÇAMENTOS FUTUROS
   void futureRelease() {
-    SmsSender sender = SmsSender();
-    String address = "4828";
 
     SmsMessage message = SmsMessage(address, 'Lanc Futuros');
     message.onStateChanged.listen((state) {
@@ -103,8 +101,6 @@ class HomeController {
   }
 
   void savingsBalance() {
-    SmsSender sender = SmsSender();
-    String address = "4828";
 
     SmsMessage message = SmsMessage(address, 'Saldo poupança');
     message.onStateChanged.listen((state) {
@@ -119,8 +115,6 @@ class HomeController {
 
   //VALOR DÍSPONÍVEL PARA GASTAR NO CARTÃO
   void limits() {
-    SmsSender sender = SmsSender();
-    String address = "4828";
 
     SmsMessage message = SmsMessage(address, 'Limite ');
     message.onStateChanged.listen((state) {
@@ -135,8 +129,6 @@ class HomeController {
 
   //ÚLTIMOS LANÇAMENTOS DO MÊS NA FATURA DO CARTÃO
   void lastEntriesMonthCard() {
-    SmsSender sender = SmsSender();
-    String address = "4828";
 
     SmsMessage message = SmsMessage(address, 'Lancamentos ');
     message.onStateChanged.listen((state) {
@@ -151,8 +143,6 @@ class HomeController {
 
   //MELHOR DATA DE COMPRA DO SEU CARTÃO
   void bestDate() {
-    SmsSender sender = SmsSender();
-    String address = "4828";
 
     SmsMessage message = SmsMessage(address, 'Melhor data ');
     message.onStateChanged.listen((state) {
@@ -168,7 +158,7 @@ class HomeController {
   Future<void> showMyDialog(context, bodyMessage) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: true, // user must tap button!
+      barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return StreamBuilder(
           stream: streamAlertOutput,
