@@ -9,14 +9,18 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Serviço de SMS do banco Itaú'),
+        centerTitle: true,
+        backgroundColor: Color(0xffEC7002),
+      ),
       body: GridView.builder(
         padding: EdgeInsets.all(8),
         itemCount: loadedSmsInfo.length,
         itemBuilder: (context, index) => SmsItem(loadedSmsInfo[index]),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 3/3,
+          childAspectRatio: 4/3,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10
         ),
