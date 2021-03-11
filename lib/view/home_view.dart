@@ -3,9 +3,18 @@ import 'package:sms_itau/data/dummy_data.dart';
 import 'package:sms_itau/model/sms_info.dart';
 import 'package:sms_itau/widgets/sms_item.dart';
 
-import '../model/sms_info.dart';
+class HomeView extends StatefulWidget {
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
 
-class HomeView extends StatelessWidget {
+class _HomeViewState extends State<HomeView> {
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
   final List<SmsInfo> loadedSmsInfo = DUMMY_SMS_INFO;
 
   @override

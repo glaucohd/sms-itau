@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:sms_maintained/sms.dart';
 
 class HomeController {
-  String bodyMessage;
+  List bodyMessage = [];
   String address = "4828";
+  String digitsCard;
 
   final sender = SmsSender();
-  final StreamController streamAlert = StreamController();
+  final StreamController streamAlert = StreamController.broadcast();
+  TextEditingController digitsCardController = TextEditingController();
 
   Sink get streamAlertInput => streamAlert.sink;
   Stream get streamAlertOutput => streamAlert.stream;
-
-  
 
   void dispose() {
     streamAlert.close();
@@ -50,8 +50,10 @@ class HomeController {
   void getSmsMessage(context) {
     SmsReceiver receiver = new SmsReceiver();
     receiver.onSmsReceived.listen((SmsMessage msg) {
-      bodyMessage = msg.body;
+      bodyMessage.add(msg.body);
+
       streamAlertInput.add(bodyMessage);
+
       print(bodyMessage);
     });
 
@@ -60,7 +62,6 @@ class HomeController {
 
   //SALDO DA CONTA
   void accountBalance() {
-
     SmsMessage message = SmsMessage(address, 'Saldo conta');
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
@@ -74,7 +75,6 @@ class HomeController {
 
   //EXTRATO DA CONTA
   void accountStatement() {
-
     SmsMessage message = SmsMessage(address, 'Extrato');
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
@@ -88,7 +88,6 @@ class HomeController {
 
   //LANÇAMENTOS FUTUROS
   void futureRelease() {
-
     SmsMessage message = SmsMessage(address, 'Lanc Futuros');
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
@@ -101,7 +100,6 @@ class HomeController {
   }
 
   void savingsBalance() {
-
     SmsMessage message = SmsMessage(address, 'Saldo poupança');
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
@@ -115,7 +113,6 @@ class HomeController {
 
   //VALOR DÍSPONÍVEL PARA GASTAR NO CARTÃO
   void limits() {
-
     SmsMessage message = SmsMessage(address, 'Limite ');
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
@@ -129,7 +126,6 @@ class HomeController {
 
   //ÚLTIMOS LANÇAMENTOS DO MÊS NA FATURA DO CARTÃO
   void lastEntriesMonthCard() {
-
     SmsMessage message = SmsMessage(address, 'Lancamentos ');
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
@@ -143,7 +139,6 @@ class HomeController {
 
   //MELHOR DATA DE COMPRA DO SEU CARTÃO
   void bestDate() {
-
     SmsMessage message = SmsMessage(address, 'Melhor data ');
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
@@ -180,7 +175,7 @@ class HomeController {
                       children: [
                         snapshot.data == null
                             ? CircularProgressIndicator()
-                            : Text(snapshot.data),
+                            : Text(snapshot.data.toString()),
                       ],
                     )
                   ],

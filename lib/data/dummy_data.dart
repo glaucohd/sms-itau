@@ -1,6 +1,7 @@
 import '../model/sms_info.dart';
 
 final DUMMY_SMS_INFO = [
+  
   SmsInfo(
     id:'1',
     title:'Saldo da conta',
@@ -43,4 +44,5 @@ final DUMMY_SMS_INFO = [
     description:'Melhor data de compra do seu cartão',
     image: 'assets/images/calendar-check-solid.svg',
   ),
+
 ];
