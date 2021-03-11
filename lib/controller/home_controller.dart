@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sms_maintained/sms.dart';
 
 class HomeController {
-  List bodyMessage = [];
+  String bodyMessage;
   String address = "4828";
   String digitsCard;
 
@@ -50,7 +50,7 @@ class HomeController {
   void getSmsMessage(context) {
     SmsReceiver receiver = new SmsReceiver();
     receiver.onSmsReceived.listen((SmsMessage msg) {
-      bodyMessage.add(msg.body);
+      bodyMessage = msg.body;
 
       streamAlertInput.add(bodyMessage);
 
@@ -175,7 +175,7 @@ class HomeController {
                       children: [
                         snapshot.data == null
                             ? CircularProgressIndicator()
-                            : Text(snapshot.data.toString()),
+                            : Text(snapshot.data),
                       ],
                     )
                   ],
@@ -197,4 +197,52 @@ class HomeController {
       },
     );
   }
+
+  /*Future<void> showMyDialog(context, bodyMessage) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return StreamBuilder(
+          stream: streamAlertOutput,
+          builder: (context, snapshot) {
+            return AlertDialog(
+              title: snapshot.data == null
+                  ? Text(
+                      'Só um instante',
+                      textAlign: TextAlign.center,
+                    )
+                  : Text(
+                      'CHEGOU!!',
+                      textAlign: TextAlign.center,
+                    ),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        snapshot.data == null
+                            ? CircularProgressIndicator()
+                            : Text(snapshot.data),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                snapshot.data != null
+                    ? TextButton(
+                        child: Text('OK'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    : null,
+              ],
+            );
+          },
+        );
+      },
+    );
+  }*/
 }

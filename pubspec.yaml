@@ -30,12 +30,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   sms_maintained: ^0.2.5
   flutter_svg: ^0.19.3
-  url_launcher: ^6.0.2
+  flutter_mobx: ^1.1.0+2
+  mobx: ^1.2.1+4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  mobx_codegen: ^1.1.2
+  build_runner: ^1.11.5
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

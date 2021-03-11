@@ -46,6 +46,4 @@ class _SmsItemState extends State<SmsItem> {
       ),
     );
   }
-
-  
 }

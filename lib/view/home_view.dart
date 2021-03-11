@@ -10,11 +10,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
 
-  @override
-  void initState() {
-
-    super.initState();
-  }
   final List<SmsInfo> loadedSmsInfo = DUMMY_SMS_INFO;
 
   @override
